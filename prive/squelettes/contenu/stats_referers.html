@@ -17,7 +17,7 @@
 		]
 	</ul>
 </div>
-<BOUCLE_blacklist(spip_referer_spam)>#SET{blacklist,#GET{blacklist,#ARRAY{0,' '}}|push{#REFERER}}</BOUCLE_blacklist>#SET{blacklist,#GET{blacklist}|implode}
+<BOUCLE_blacklist(spip_referer_spam)>#SET{blacklist,#GET{blacklist,#ARRAY{0,' '}}|push{#REFERER}}</BOUCLE_blacklist>#SET{blacklist,#GET{blacklist}|implode{' '}}
 <B_statsr>
 	<h1><:statistiques:onglet_origine_visites:> (#TOTAL_BOUCLE [(#TOTAL_BOUCLE|singulier_ou_pluriel{info_site,info_sites})])</h1>
 	<div class="liste">
