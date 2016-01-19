@@ -5,7 +5,7 @@
 	[<h2>(#ENV{jour,''}|=={jour}|oui)<:date_aujourdhui|ucfirst:></h2>]
 	[<h2>(#ENV{jour,''}|=={veille}|oui)<:date_hier|ucfirst:></h2>]
 	<ul class="liste-items referers">
-		<BOUCLE_spam(spip_referer_spam)>
+		<BOUCLE_spam(spip_referer_spam){!par date}>
 			<li class="item referer">
 				<h3>
 
