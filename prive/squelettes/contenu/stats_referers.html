@@ -25,7 +25,7 @@
 		[<h2>(#ENV{jour,''}|=={veille}|oui)<:date_hier|ucfirst:></h2>]
 		<ul class="liste-items referers">
 			<BOUCLE_statsr(DATA){source stats_referers,#ENV{limit,100},#ENV{jour,''},#ENV{id_article}}>
-				[(#GET{blacklist}|strpos{#VALEUR{url}}|non)
+				#SET{whitelisted,#GET{blacklist}|strpos{#VALEUR{url}}|non}[(#GET{whitelisted}|oui)
 				<li class="item referer" onclick="$(this).toggleClass('open').find('.referer-detail').toggle('fast');">
 						<h3>
 							<span class="visites">[[(#VALEUR{visites}) ](#VALEUR{visites}|singulier_ou_pluriel{info_visite,statistiques:info_visites}|trim{:}|trim)]</span>
@@ -42,7 +42,7 @@
 						<B_sous>
 							<div class="referer-detail none-js">
 								<ul>
-								<BOUCLE_sous(POUR){tableau #VALEUR{referers}}{si #GET{blacklist}|strpos{#VALEUR{url}}|non}>
+								<BOUCLE_sous(POUR){tableau #VALEUR{referers}}{si #GET{whitelisted}|oui}>
 									<li><a href="#VALEUR{referer}">[(#VALEUR{keywords}|?{[&laquo;&nbsp;(#VALEUR{keywords})&nbsp;&raquo;],[(#VALEUR{path})]})]</a>
 										[(#VALEUR{visites}|>{1}|oui)\(#VALEUR{visites}\)]
 										[<br />(#VALEUR{referes})]
@@ -51,7 +51,7 @@
 								</ul>
 							</div>
 						</B_sous>
-				[(#GET{blacklist}|strpos{#VALEUR{url}}|non)
+				[(#GET{whitelisted}|oui)
 				</li>
 				]
 			</BOUCLE_statsr>
