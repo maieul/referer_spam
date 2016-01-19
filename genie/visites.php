@@ -91,7 +91,7 @@ function calculer_visites($t) {
 		    $referer));
         if (strlen($referer) && sql_countsel('spip_referer_spam', array("referer LIKE %'$referer'%"))) {
             unset($visites[$date]);
-			spip_log("Referer spam bloqué ($referer)");
+			// spip_log("Referer spam bloqué ($referer)");
 		}
     }
     // Referer Spam filter END
