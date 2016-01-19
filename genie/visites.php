@@ -85,7 +85,7 @@ function calculer_visites($t) {
 	$sessions = preg_files(sous_repertoire(_DIR_TMP, 'visites'));
 
 	$compteur = _CRON_LOT_FICHIERS_VISITE;
-	$date_init = time();//-30*60;
+	$date_init = time()-30*60;
 	foreach ($sessions as $item) {
 		if (($d=@filemtime($item)) < $date_init) {
 			if (!$d) $d = $date_init; // si le fs ne donne pas de date, on prend celle du traitement, mais tout cela risque d'etre bien douteux
