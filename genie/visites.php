@@ -30,8 +30,7 @@ function compte_fichier_visite($fichier, &$visites, &$visites_a, &$referers, &$r
 
 	// Verifier le referer (referer spam)
 	foreach ($content as $source => $num) {
-		$log_referer = explode($source)[2];
-
+		$log_referer = explode("\t",$source)[2];
 		if ($log_referer) {
 
 			$referer_test = str_replace(array('http://','https://'), '',$log_referer);
