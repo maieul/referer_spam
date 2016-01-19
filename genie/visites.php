@@ -23,13 +23,29 @@ if (!defined('_CRON_LOT_FICHIERS_VISITE')) define('_CRON_LOT_FICHIERS_VISITE', 1
 // http://doc.spip.org/@compte_fichier_visite
 function compte_fichier_visite($fichier, &$visites, &$visites_a, &$referers, &$referers_a) {
 
-	// Noter la visite du site (article 0)
-	$visites ++;
-
 	$content = array();
 	if (lire_fichier($fichier, $content))
 		$content = @unserialize($content);
 	if (!is_array($content)) return;
+
+	// Verifier le referer (referer spam)
+	foreach ($content as $source => $num) {
+		$log_referer = explode($source)[2];
+
+		if ($log_referer) {
+
+			$referer_test = str_replace(array('http://','https://'), '',$log_referer);
+			if (strpos($referer_test,'/'))
+				$referer_test = substr($referer_test,0,strpos($referer_test,'/'));
+
+			if (strlen($referer_test) AND sql_countsel('spip_referer_spam', "referer LIKE '%$referer_test%'")) {
+				spip_log("Referer spam bloqué ($referer_test)");
+			    return;
+			} else {
+				spip_log("Referer accepté ($referer_test)");
+			}
+		}
+	}
 
 	foreach ($content as $source => $num) {
 		list($log_type, $log_id_num, $log_referer)
@@ -47,6 +63,9 @@ function compte_fichier_visite($fichier, &$visites, &$visites_a, &$referers, &$r
 				$referers_a[$id_article][$log_referer]++;
 		}
 	}
+
+	// Noter la visite du site (article 0)
+	$visites ++;
 }
 
 
@@ -67,7 +86,7 @@ function calculer_visites($t) {
 	$sessions = preg_files(sous_repertoire(_DIR_TMP, 'visites'));
 
 	$compteur = _CRON_LOT_FICHIERS_VISITE;
-	$date_init = time()-30*60;
+	$date_init = time();//-30*60;
 	foreach ($sessions as $item) {
 		if (($d=@filemtime($item)) < $date_init) {
 			if (!$d) $d = $date_init; // si le fs ne donne pas de date, on prend celle du traitement, mais tout cela risque d'etre bien douteux
@@ -84,17 +103,7 @@ function calculer_visites($t) {
 	if (!count($visites))
 		return;
 
-    // Referer Spam filter BEGIN
-    foreach ($referers as $date=>$referer) {
-        $referer = preg_replace(',/$,', '',
-            preg_replace(',^(https?://)?(www\.)?,i', '',
-		    $referer));
-        if (strlen($referer) && sql_countsel('spip_referer_spam', array("referer LIKE %'$referer'%"))) {
-            unset($visites[$date]);
-			// spip_log("Referer spam bloqué ($referer)");
-		}
-    }
-    // Referer Spam filter END
+
 
 	include_spip('genie/popularites');
 	list($a,$b) = genie_popularite_constantes(24*3600);
