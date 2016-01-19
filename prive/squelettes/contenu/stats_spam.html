@@ -1,0 +1,20 @@
+[(#AUTORISER{voirstats}|sinon_interdire_acces)]
+<BOUCLE_spamtotal(spip_referer_spam)> </BOUCLE_spamtotal>#SET{total,#TOTAL_BOUCLE}</B_spamtotal>
+<h1>Liste noire ([(#GET{total}|sinon{0})] site[(#GET{total}|singulier_ou_pluriel{'','s'})])</h1>
+<div class="liste">
+	[<h2>(#ENV{jour,''}|=={jour}|oui)<:date_aujourdhui|ucfirst:></h2>]
+	[<h2>(#ENV{jour,''}|=={veille}|oui)<:date_hier|ucfirst:></h2>]
+	<ul class="liste-items referers">
+		<BOUCLE_spam(spip_referer_spam)>
+			<li class="item referer">
+				<h3>
+
+				    [<span style="float:right">(#BOUTON_ACTION{#REM|sinon{<:referer_spam:supprimer_spam:>}, #URL_ACTION_AUTEUR{referer_spam_supprimer,'',#SELF}|parametre_url{url,#REFERER}, 'small ajax noscroll',''})</span>]
+					<a href="#REFERER">#REFERER</a>
+
+				</h3>
+
+			</li>
+		</BOUCLE_spam>
+	</ul>
+</div>

@@ -1,0 +1,21 @@
+<paquet
+	prefix="referer_spam"
+	categorie="statistique"
+	version="0.1"
+	etat="dev"
+	compatibilite="[v3;["
+	logo="prive/themes/spip/images/burn-32.png"
+	schema="1.0.0"
+>
+
+	<nom>referer_spam</nom>
+
+	<auteur lien="http://ammd.net">Jean-Emmanuel Doucet</auteur>
+	<licence lien="https://www.gnu.org/licenses/gpl.html">GNU/GPL3</licence>
+
+    <pipeline nom="declarer_tables_auxiliaires" inclure="base/referer_spam.php" />
+
+    <onglet nom="stats_spam" titre="paquet-referer_spam:listenoire" parent="statistiques" action="stats_spam" icone="images/burn-24.png" />
+
+    <utilise nom="statistiques" />
+</paquet>
