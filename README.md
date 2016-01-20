@@ -1,4 +1,4 @@
-<h1><img src="http://contrib.spip.net/local/cache-gd2/8d/d89e3fe02c8b41b8f23f33b541a209.png?1453217799"/> Refere spam</h1>
+<h1><img src="http://contrib.spip.net/local/cache-gd2/8d/d89e3fe02c8b41b8f23f33b541a209.png?1453217799"/> Referer spam</h1>
 
 
 ###### Le but de ce plugin est d’exclure les liens entrants frauduleux des statistiques à l’aide d’une liste noire.
