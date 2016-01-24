@@ -17,6 +17,12 @@ Afin de lutter contre le [referer spam](https://fr.wikipedia.org/wiki/Pourriel_d
  - Filtrage des liens entrants affichés en fonction de la liste noire
 
 
+### Installation
+
+Pour installer le plugin depuis l’espace privé de spip, il est nécessaire d’ajouter le dépôt suivant en plus de celui proposé par défaut :
+
+http://files.spip.org/externals/archives_externals.xml
+
 ### Comment s'en servir
 
 L'utilisation du plugin est simple : il suffit de marquer manuellement les liens entrants suspects sur la page *Liens entrants*.
