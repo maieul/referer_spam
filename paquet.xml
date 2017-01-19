@@ -1,7 +1,7 @@
 <paquet
 	prefix="referer_spam"
 	categorie="statistique"
-	version="0.2.3"
+	version="0.2.4"
 	etat="test"
 	compatibilite="[3.0.0;3.1.*]"
 	logo="prive/themes/spip/images/burn-32.png"
