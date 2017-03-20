@@ -4,12 +4,12 @@
 	    return;
     }
 
-    function action_referer_spam_ajouter($p,$arg) {
+    function action_referer_spam_ajouter() {
 	    include_spip('base/abstract_sql');
 
 	    $url = $_GET['url'];
 
-        // if (sql_countsel("spip_referers", "referer LIKE '%$url%'")) 
+        // if (sql_countsel("spip_referers", "referer LIKE '%$url%'"))
         //     sql_delete("spip_referers", "referer LIKE '%$url%'");
         //
         // if (sql_countsel("spip_referers_articles", "referer LIKE '%$url%'"))
